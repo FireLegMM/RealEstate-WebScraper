@@ -1,0 +1,15 @@
+version: '1'
+services:
+  postgres-unicorn:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: realestate
+      POSTGRES_PASSWORD: realestate
+      POSTGRES_DB: realestate
+    restart: always
+    ports: 
+        - 5432:5432
+  metabase:
+    image: metabase/metabase:latest
+    ports: 
+        - 3000:3000
