@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 
 url = 'https://www.otodom.pl/pl/oferty/sprzedaz/mieszkanie/powiat-wolominski?distanceRadius=0&locations=%5Bsubregions-200%5D&viewType=listing&limit=72'
-data_path = '/data/'
+data_path = './web-scraper/data/'
 data = requests.get(url)
 
 
@@ -31,5 +31,5 @@ now = datetime.now()
 date_str = now.strftime('%Y%m%d')
 
 file_name = f'data_{date_str}.json'
-with open(data_path + file_name, 'w', encoding='utf-8') as f:
+with open(data_path + file_name, 'a+', encoding='utf-8') as f:
     json.dump(dane, f, ensure_ascii=False, indent=4)
