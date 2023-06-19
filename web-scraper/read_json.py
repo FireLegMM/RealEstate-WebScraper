@@ -5,12 +5,12 @@ import os
 import pathlib
 
 engine = create_engine("postgresql://airflow:airflow@localhost:5432/realestate")
-path = str(pathlib.Path(__file__).parent.resolve()) + '\\data\\'
+path = pathlib.Path(str(pathlib.Path(__file__).parent.resolve()) + '/data/')
 df_lst = []
 
 for file in os.listdir(path):
 
-    with open(path + file, mode="r", encoding="utf-8") as data:
+    with open(pathlib.Path(str(path) + '/' + file), mode="r", encoding="utf-8") as data:
         data = data.read()
     lst = json.loads(data)
     

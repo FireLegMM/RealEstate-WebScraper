@@ -6,9 +6,8 @@ from datetime import datetime
 import pathlib
 
 url = 'https://www.otodom.pl/pl/oferty/sprzedaz/mieszkanie/powiat-wolominski?distanceRadius=0&locations=%5Bsubregions-200%5D&viewType=listing&limit=72'
-data_path = str(pathlib.Path(__file__).parent.resolve()) + '\\data\\'
+data_path = pathlib.Path(str(pathlib.Path(__file__).parent.resolve()) + '/data/')
 data = requests.get(url)
-
 
 soup = bs(data.content,'html.parser')
 
@@ -32,5 +31,5 @@ now = datetime.now()
 date_str = now.strftime('%Y%m%d')
 
 file_name = f'data_{date_str}.json'
-with open(data_path + file_name, 'a+', encoding='utf-8') as f:
+with open(pathlib.Path(str(data_path) +'/' + file_name), 'a+', encoding='utf-8') as f:
     json.dump(dane, f, ensure_ascii=False, indent=4)
