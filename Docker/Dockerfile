@@ -1,12 +1,14 @@
-FROM python:alpine3.18
+FROM python:3.10
 
-
-
-VOLUME /web-scraper
-RUN cd web-scraper
+RUN apt-get update && apt-get -y install cron vim
+COPY ./crontab crontab
+COPY ./requirements.txt requirements.txt
+RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools
 RUN pip install -r requirements.txt
-RUN sudo apt-get install cron
+RUN crontab crontab
+
+WORKDIR /web-scraper
 
 
-
-RUN pip install
+ENTRYPOINT ["tail", "-f", "/dev/null"]

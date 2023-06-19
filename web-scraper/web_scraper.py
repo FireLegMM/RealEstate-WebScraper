@@ -3,9 +3,10 @@ from bs4 import BeautifulSoup as bs
 import json
 import os
 from datetime import datetime
+import pathlib
 
 url = 'https://www.otodom.pl/pl/oferty/sprzedaz/mieszkanie/powiat-wolominski?distanceRadius=0&locations=%5Bsubregions-200%5D&viewType=listing&limit=72'
-data_path = './web-scraper/data/'
+data_path = str(pathlib.Path(__file__).parent.resolve()) + '\\data\\'
 data = requests.get(url)
 
 

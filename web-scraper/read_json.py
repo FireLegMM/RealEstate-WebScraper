@@ -2,9 +2,10 @@ import pandas as pd
 import json
 from sqlalchemy import create_engine
 import os
+import pathlib
 
 engine = create_engine("postgresql://airflow:airflow@localhost:5432/realestate")
-path = './web-scraper/data/'
+path = str(pathlib.Path(__file__).parent.resolve()) + '\\data\\'
 df_lst = []
 
 for file in os.listdir(path):
