@@ -5,15 +5,13 @@ import os
 import pathlib
 
 engine = create_engine("postgresql://airflow:airflow@localhost:5432/realestate")
-path = pathlib.Path(str(pathlib.Path(__file__).parent.resolve()) + '/data/')
+path = pathlib.Path(str(pathlib.Path(__file__).parent.resolve()) + "/data/")
 df_lst = []
 
 for file in os.listdir(path):
-
-    with open(pathlib.Path(str(path) + '/' + file), mode="r", encoding="utf-8") as data:
+    with open(pathlib.Path(str(path) + "/" + file), mode="r", encoding="utf-8") as data:
         data = data.read()
     lst = json.loads(data)
-    
 
     for i in lst:
         id = i["id"]
@@ -33,7 +31,19 @@ for file in os.listdir(path):
             rent_value = None
         else:
             rent_value = i["totalPrice"]["value"]
-        df_lst.append([id, city, area, value, curr, rent_value, transaction, estate_type, import_date])
+        df_lst.append(
+            [
+                id,
+                city,
+                area,
+                value,
+                curr,
+                rent_value,
+                transaction,
+                estate_type,
+                import_date,
+            ]
+        )
 
 df = pd.DataFrame(df_lst)
 df.columns = [
@@ -47,6 +57,6 @@ df.columns = [
     "estate_type",
     "import_date",
 ]
-df['import_date'] = df['import_date'].astype('datetime64[ns]')
+df["import_date"] = df["import_date"].astype("datetime64[ns]")
 
-df.to_sql('data', con = engine, if_exists='replace')
+df.to_sql("data", con=engine, if_exists="replace")
