@@ -18,5 +18,5 @@ services:
       context: .
       dockerfile: Docker/Dockerfile
     volumes:
-      - ./web-scraper:/web-scraper
+      - ./web-scraper:/home/web-scraper
 
